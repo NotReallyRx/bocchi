@@ -22,7 +22,7 @@ function renderGames(zones) {
   for (const game of games) {
     const link = document.createElement("a");
     link.className = "game";
-    link.href = `/l/?url=${encodeURIComponent(resolve(game.url, game.id))}`;
+    link.href = `/l/?g=${game.id}`;
     link.title = game.name;
 
     const cover = document.createElement("div");
