@@ -78,7 +78,7 @@
 
         <iframe
           id="gameFrame"
-          title="Game"
+          title="Activity"
           allow="fullscreen; autoplay; gamepad; clipboard-write"
           allowfullscreen>
         </iframe>
@@ -89,7 +89,7 @@
           <div class="spinner"></div>
 
           <div id="loadingText">
-            Loading game...
+            Loading activity...
           </div>
 
         </div>
@@ -100,11 +100,11 @@
           <h1>Couldn't load that</h1>
 
           <p id="errorMessage">
-            Something went wrong loading this game.
+            Something went wrong loading this activity.
           </p>
 
-          <a href="/g/">
-            Back to games
+          <a href="../g/">
+            Back to activities
           </a>
 
         </div>
@@ -119,7 +119,7 @@
   <script>
     /*
      * If the wrapper itself has ?embed=1,
-     * hide all of the wrapper UI and let the game
+     * hide all of the wrapper UI and let the activity
      * occupy the entire page.
      */
     const params = new URLSearchParams(location.search);

@@ -82,8 +82,8 @@ nav a .apps-icon{
   width:19px;
   height:19px;
   background-color:currentColor;
-  -webkit-mask-image:url("/img/icons/apps.svg");
-  mask-image:url("/img/icons/apps.svg");
+  -webkit-mask-image:url("../img/icons/apps.svg");
+  mask-image:url("../img/icons/apps.svg");
   -webkit-mask-mode:alpha;
   mask-mode:alpha;
   -webkit-mask-size:contain;

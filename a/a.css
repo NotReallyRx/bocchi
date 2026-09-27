@@ -40,7 +40,7 @@ body::before{
   z-index:0;
 }
 
-/* floating nav (same as homepage / games page) */
+/* floating nav (same as homepage / activities page) */
 nav{
   position:fixed;
   bottom:calc(22px + env(safe-area-inset-bottom,0px));
@@ -77,8 +77,8 @@ nav a .apps-icon{
   width:19px;
   height:19px;
   background-color:currentColor;
-  -webkit-mask-image:url("/img/icons/apps.svg");
-  mask-image:url("/img/icons/apps.svg");
+  -webkit-mask-image:url("../img/icons/apps.svg");
+  mask-image:url("../img/icons/apps.svg");
   -webkit-mask-mode:alpha;
   mask-mode:alpha;
   -webkit-mask-size:contain;

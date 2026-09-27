@@ -88,7 +88,7 @@
   /* =========================================================
      BUILD EMBED URL
      
-     Games:
+     Activities:
        /l/?g=1
        -> /l/embed/?g=1
 
@@ -143,7 +143,7 @@
   if (!embedUrl) {
 
     showError(
-      "No game or site was specified."
+      "No activity or site was specified."
     );
 
   } else {
@@ -153,7 +153,7 @@
      */
 
     if (gameId) {
-      showLoading("Loading game...");
+      showLoading("Loading activity...");
     } else {
       showLoading("Loading site...");
     }
@@ -162,7 +162,7 @@
     /*
      * The iframe points ONLY to /l/embed/.
      *
-     * l.js does not load games.
+     * l.js does not load activities.
      *
      * l.js does not run Scramjet.
      *
@@ -185,7 +185,7 @@
       () => {
 
         if (gameId) {
-          showError("Couldn't load that game.");
+          showError("Couldn't load that activity.");
         } else {
           showError("Couldn't load that site.");
         }
@@ -250,7 +250,7 @@
 
 
       if (gameId) {
-        showLoading("Loading game...");
+        showLoading("Loading activity...");
       } else {
         showLoading("Loading site...");
       }

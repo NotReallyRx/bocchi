@@ -4,7 +4,7 @@ const coverURL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main";
 const htmlURL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main";
 
 const status = document.getElementById("status");
-const grid = document.getElementById("gamesGrid");
+const grid = document.getElementById("activitiesGrid");
 
 function resolve(template, id) {
   return template
@@ -12,24 +12,24 @@ function resolve(template, id) {
     .replace("{HTML_URL}", htmlURL);
 }
 
-function renderGames(zones) {
-  const games = zones.filter((zone) => zone.id >= 0);
+function renderActivities(zones) {
+  const activities = zones.filter((zone) => zone.id >= 0);
 
   status.style.display = "none";
 
   const fragment = document.createDocumentFragment();
 
-  for (const game of games) {
+  for (const activity of activities) {
     const link = document.createElement("a");
-    link.className = "game";
-    link.href = `/l/?g=${game.id}`;
-    link.title = game.name;
+    link.className = "activity";
+    link.href = `/l/?g=${activity.id}`;
+    link.title = activity.name;
 
     const cover = document.createElement("div");
     cover.className = "cover";
 
     const img = document.createElement("img");
-    img.src = resolve(game.cover, game.id);
+    img.src = resolve(activity.cover, activity.id);
     img.alt = "";
     img.loading = "lazy";
 
@@ -37,7 +37,7 @@ function renderGames(zones) {
 
     const name = document.createElement("span");
     name.className = "name";
-    name.textContent = game.name;
+    name.textContent = activity.name;
 
     link.appendChild(cover);
     link.appendChild(name);
@@ -56,8 +56,8 @@ fetch(ZONES_URL)
 
     return response.json();
   })
-  .then(renderGames)
+  .then(renderActivities)
   .catch((error) => {
-    console.error("Failed to load games:", error);
-    status.textContent = "Couldn't load the games list.";
+    console.error("Failed to load activities:", error);
+    status.textContent = "Couldn't load the activities list.";
   });

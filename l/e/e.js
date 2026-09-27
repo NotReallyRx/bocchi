@@ -27,7 +27,7 @@
   }
 
   async function loadGame() {
-    setLoading("Loading game...");
+    setLoading("Loading activity...");
 
     const response = await fetch(ZONES_URL);
 
@@ -37,26 +37,26 @@
 
     const zones = await response.json();
 
-    const game = zones.find(
+    const activity = zones.find(
       item => String(item.id) === String(gameId)
     );
 
-    if (!game) {
-      throw new Error("Game not found.");
+    if (!activity) {
+      throw new Error("Activity not found.");
     }
 
-    if (!game.url) {
-      throw new Error("Game URL is missing.");
+    if (!activity.url) {
+      throw new Error("Activity URL is missing.");
     }
 
-    const gameUrl = game.url
+    const gameUrl = activity.url
       .replace("{HTML_URL}", HTML_URL);
 
     const gameResponse = await fetch(gameUrl);
 
     if (!gameResponse.ok) {
       throw new Error(
-        `Couldn't load game (${gameResponse.status}).`
+        `Couldn't load activity (${gameResponse.status}).`
       );
     }
 
@@ -153,7 +153,7 @@
         return;
       }
 
-      throw new Error("No game or site was specified.");
+      throw new Error("No activity or site was specified.");
     } catch (error) {
       console.error("Embed initialization failed:", error);
 
