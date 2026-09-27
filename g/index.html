@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bocchi — Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="./g.css">
+</head>
+<body>
+
+<nav aria-label="Main">
+  <a href="/" aria-label="Home" title="Home"><i class="fa-solid fa-house"></i></a>
+  <a href="/g/" class="active" aria-label="Games" title="Games"><i class="fa-solid fa-gamepad"></i></a>
+  <a href="/a/" aria-label="Apps" title="Apps"><span class="apps-icon" aria-hidden="true"></span></a>
+  <a href="/s/" aria-label="Settings" title="Settings"><i class="fa-solid fa-gear"></i></a>
+</nav>
+
+<main>
+  <h1 class="wordmark">games</h1>
+
+  <div id="status">Loading games...</div>
+  <div class="games-grid" id="gamesGrid"></div>
+</main>
+
+<script src="./g.js"></script>
+</body>
+</html>

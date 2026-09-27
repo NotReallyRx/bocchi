@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spotify</title>
+
+  <script src="/scramjet/scramjet.js"></script>
+  <script src="/controller/controller.api.js"></script>
+  <script src="/transport/libcurl.js"></script>
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #proxyFrame {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #000;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <iframe
+    id="proxyFrame"
+    title="Spotify"
+    allow="autoplay; clipboard-read; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <div id="loading">Loading Spotify...</div>
+
+  <script>
+    let controller = null;
+    let frame = null;
+
+    const proxyFrame = document.getElementById("proxyFrame");
+    const loading = document.getElementById("loading");
+
+    const WISP_URL =
+      localStorage.getItem("wispUrl") ||
+      "wss://g.novalee.xyz/wisp/";
+
+    async function waitForServiceWorker() {
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+        updateViaCache: "none"
+      });
+
+      await navigator.serviceWorker.ready;
+
+      if (navigator.serviceWorker.controller) {
+        return navigator.serviceWorker.controller;
+      }
+
+      if (!registration.active) {
+        throw new Error("Scramjet service worker is not active.");
+      }
+
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error("Scramjet service worker did not take control."));
+        }, 10000);
+
+        navigator.serviceWorker.addEventListener(
+          "controllerchange",
+          () => {
+            clearTimeout(timeout);
+            resolve();
+          },
+          { once: true }
+        );
+      });
+
+      return navigator.serviceWorker.controller;
+    }
+
+    async function start() {
+      try {
+        const serviceworker = await waitForServiceWorker();
+
+        const transport = new LibcurlTransport.LibcurlClient({
+          websocket: WISP_URL
+        });
+
+        controller = new $scramjetController.Controller({
+          serviceworker,
+          transport
+        });
+
+        await controller.wait();
+
+        frame = controller.createFrame(proxyFrame);
+        frame.go("https://open.spotify.com/");
+
+        proxyFrame.addEventListener("load", () => {
+          loading.style.display = "none";
+        });
+      } catch (error) {
+        console.error("Spotify initialization failed:", error);
+        loading.textContent = "Failed to load Spotify: " + error.message;
+      }
+    }
+
+    start();
+  </script>
+</body>
+</html>
+

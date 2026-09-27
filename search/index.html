@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Zinc</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="./search.css" />
+
+    <script src="/scramjet/scramjet.js"></script>
+    <script src="/controller/controller.api.js"></script>
+    <script src="/transport/libcurl.js"></script>
+  </head>
+
+  <body>
+    <div id="frame">
+      <section id="browser">
+        <header class="toolbar">
+          <button id="homeButton" title="Home"><i class="fa-solid fa-house"></i></button>
+
+          <div class="divider"></div>
+
+          <button id="backButton" title="Back"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="forwardButton" title="Forward"><i class="fa-solid fa-chevron-right"></i></button>
+          <button id="reloadButton" title="Reload"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+
+          <div class="address-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              id="addressBar"
+              type="text"
+              placeholder="Search or enter URL"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+
+          <div class="settings-wrap">
+            <button id="settingsButton" title="Settings"><i class="fa-solid fa-gear"></i></button>
+
+            <div id="settingsMenu">
+              <label for="wispInput">Wisp server</label>
+              <input id="wispInput" type="text" spellcheck="false" autocomplete="off" />
+              <button id="saveWispButton">Save &amp; reload</button>
+            </div>
+          </div>
+        </header>
+
+        <main id="content">
+          <iframe id="proxyFrame" title="Proxy"></iframe>
+
+          <div id="loading">
+            <div id="loadingText">Loading...</div>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script src="./search.js"></script>
+  </body>
+</html>

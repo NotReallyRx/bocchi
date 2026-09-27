@@ -1,0 +1,161 @@
+:root{
+  --bg:#201915;
+  --surface:#2a2019;
+  --surface-2:#33261c;
+  --cream:#f2e6d6;
+  --muted:#b4a08b;
+  --amber:#e0a45f;
+  --amber-soft:#3a2d1e;
+  --sage:#8ea583;
+  --line:#3d3026;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#201915; --surface:#2a2019; --surface-2:#33261c; --cream:#f2e6d6; --muted:#b4a08b; --amber:#e0a45f; --amber-soft:#3a2d1e; --sage:#8ea583; --line:#3d3026;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#201915; --surface:#2a2019; --surface-2:#33261c; --cream:#f2e6d6; --muted:#b4a08b; --amber:#e0a45f; --amber-soft:#3a2d1e; --sage:#8ea583; --line:#3d3026;
+}
+*{box-sizing:border-box;}
+html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%;}
+body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--cream);
+  font-family:'Figtree',sans-serif;
+  padding-top:calc(env(safe-area-inset-top,0px));
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 700px 420px at 50% -10%, rgba(224,164,95,0.10), transparent 60%),
+    radial-gradient(ellipse 600px 500px at 90% 20%, rgba(142,165,131,0.06), transparent 60%);
+  z-index:0;
+}
+
+/* floating nav */
+nav{
+  position:fixed;
+  bottom:calc(22px + env(safe-area-inset-bottom,0px));
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+  padding:9px;
+  background:rgba(42,32,25,0.72);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.28);
+  z-index:10;
+}
+nav a{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:19px;
+  transition:color .15s ease, background .15s ease;
+}
+nav a:hover{color:var(--cream); background:var(--surface-2);}
+nav a.active{color:var(--bg); background:var(--amber);}
+nav a:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+nav a .lucide-icon{
+  width:20px;
+  height:20px;
+  color:inherit;
+}
+nav a .apps-icon{
+  display:block;
+  width:19px;
+  height:19px;
+  background-color:currentColor;
+  -webkit-mask-image:url("/img/icons/apps.svg");
+  mask-image:url("/img/icons/apps.svg");
+  -webkit-mask-mode:alpha;
+  mask-mode:alpha;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  mask-position:center;
+}
+
+main{
+  position:relative; z-index:1;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex; align-items:center; justify-content:center;
+  padding:26px;
+}
+
+.hero{text-align:center; width:100%; max-width:528px;}
+.hero .wordmark{
+  font-family:'Fraunces',serif;
+  font-optical-sizing:auto;
+  font-weight:500;
+  font-size:clamp(53px,11vw,92px);
+  line-height:1;
+  margin:0 0 26px;
+  letter-spacing:-0.01em;
+}
+.hero .flourish{
+  width:64px; height:14px; margin:18px auto 22px;
+  display:block;
+}
+.hero p{
+  color:var(--muted);
+  font-size:17px;
+  max-width:36ch;
+  margin:0 auto 34px;
+  line-height:1.6;
+}
+
+.search{
+  position:relative;
+  max-width:396px;
+  margin:0 auto;
+}
+.search i{
+  position:absolute;
+  left:22px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  font-size:15px;
+  pointer-events:none;
+}
+.search input{
+  width:100%;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--cream);
+  font-family:'Figtree',sans-serif;
+  font-size:16px;
+  padding:15px 22px 15px 48px;
+  border-radius:999px;
+  outline:none;
+  transition:border-color .15s ease;
+}
+.search input::placeholder{color:var(--muted);}
+.search input:focus{border-color:var(--amber);}
+
+@media (max-width:420px){
+  nav{gap:4px; padding:8px;}
+  nav a{width:43px; height:43px; font-size:18px;}
+  nav a .lucide-icon{width:18px; height:18px;}
+  nav a .apps-icon{width:18px; height:18px;}
+}

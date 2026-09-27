@@ -1,0 +1,253 @@
+:root{
+  --bg:#201915;
+  --surface:#2a2019;
+  --surface-2:#33261c;
+  --cream:#f2e6d6;
+  --muted:#b4a08b;
+  --amber:#e0a45f;
+  --amber-soft:#3a2d1e;
+  --sage:#8ea583;
+  --line:#3d3026;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#201915; --surface:#2a2019; --surface-2:#33261c; --cream:#f2e6d6; --muted:#b4a08b; --amber:#e0a45f; --amber-soft:#3a2d1e; --sage:#8ea583; --line:#3d3026;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#201915; --surface:#2a2019; --surface-2:#33261c; --cream:#f2e6d6; --muted:#b4a08b; --amber:#e0a45f; --amber-soft:#3a2d1e; --sage:#8ea583; --line:#3d3026;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Figtree', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* the "edge" around the whole screen */
+#frame {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+
+#browser {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+.toolbar {
+  height: 74px;
+  flex: 0 0 74px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.toolbar button {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease, color .15s ease;
+}
+
+.toolbar button:hover {
+  background: var(--surface);
+  color: var(--cream);
+}
+
+.toolbar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.toolbar button:disabled:hover {
+  background: transparent;
+  color: var(--muted);
+}
+
+#homeButton:hover {
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.toolbar .divider {
+  width: 1px;
+  height: 28px;
+  background: var(--line);
+  flex: 0 0 1px;
+  margin: 0 2px;
+}
+
+.address-wrap {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  height: 46px;
+  margin-left: 2px;
+}
+
+.address-wrap i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+#addressBar {
+  width: 100%;
+  height: 100%;
+  padding: 0 16px 0 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  outline: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-size: 15px;
+  font-family: 'Figtree', Arial, Helvetica, sans-serif;
+  transition: border-color .15s ease;
+}
+
+#addressBar::placeholder {
+  color: var(--muted);
+}
+
+#addressBar:focus {
+  border-color: var(--amber);
+}
+
+/* settings menu */
+.settings-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+#settingsMenu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  z-index: 20;
+}
+
+#settingsMenu.open {
+  display: block;
+}
+
+#settingsMenu label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+#settingsMenu input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-size: 13px;
+  font-family: 'Figtree', Arial, Helvetica, sans-serif;
+  margin-bottom: 12px;
+}
+
+#settingsMenu input:focus {
+  border-color: var(--amber);
+}
+
+#saveWispButton {
+  width: 100%;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--amber);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Figtree', Arial, Helvetica, sans-serif;
+}
+
+#saveWispButton:hover {
+  filter: brightness(1.05);
+}
+
+#content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+#proxyFrame {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+#loadingText {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  #frame { padding: 8px; }
+  #browser { border-radius: 20px; }
+  .toolbar { height: 64px; flex: 0 0 64px; gap: 4px; padding: 0 8px; }
+  .toolbar button { width: 40px; height: 40px; flex: 0 0 40px; font-size: 15px; }
+}

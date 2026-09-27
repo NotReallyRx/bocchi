@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>Bocchi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Figtree:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="./l.css">
+</head>
+
+<body>
+
+  <div id="frame">
+
+    <section id="browser">
+
+      <header class="toolbar">
+
+        <button
+          id="homeButton"
+          title="Home"
+          type="button"
+        >
+          <i class="fa-solid fa-house"></i>
+        </button>
+
+        <div class="divider"></div>
+
+        <div class="spacer"></div>
+
+        <button
+          id="openTabButton"
+          title="Open in new tab"
+          type="button"
+        >
+          <i class="fa-solid fa-up-right-from-square"></i>
+        </button>
+
+        <button
+          id="fullscreenButton"
+          title="Fullscreen"
+          type="button"
+        >
+          <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+        </button>
+
+      </header>
+
+
+      <main id="content">
+
+        <iframe
+          id="gameFrame"
+          title="Game"
+          allow="fullscreen; autoplay; gamepad; clipboard-write"
+          allowfullscreen>
+        </iframe>
+
+
+        <div id="loading">
+
+          <div class="spinner"></div>
+
+          <div id="loadingText">
+            Loading game...
+          </div>
+
+        </div>
+
+
+        <div id="errorBox">
+
+          <h1>Couldn't load that</h1>
+
+          <p id="errorMessage">
+            Something went wrong loading this game.
+          </p>
+
+          <a href="/g/">
+            Back to games
+          </a>
+
+        </div>
+
+      </main>
+
+    </section>
+
+  </div>
+
+
+  <script>
+    /*
+     * If the wrapper itself has ?embed=1,
+     * hide all of the wrapper UI and let the game
+     * occupy the entire page.
+     */
+    const params = new URLSearchParams(location.search);
+
+    if (params.get("embed") === "1") {
+      document.documentElement.classList.add("embed-mode");
+    }
+  </script>
+
+  <script src="./l.js"></script>
+
+</body>
+
+</html>
