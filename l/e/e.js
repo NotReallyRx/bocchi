@@ -4,7 +4,7 @@
   const activityId = params.get("g");
   const siteUrl = params.get("s");
 
-  const proxyFrame = document.getElementById("proxyFrame");
+  const browserFrame = document.getElementById("browserFrame");
   const loading = document.getElementById("loading");
 
   const ZONES_URL =
@@ -135,9 +135,9 @@
     await controller.wait();
 
     const frame =
-      controller.createFrame(proxyFrame);
+      controller.createFrame(browserFrame);
 
-    proxyFrame.addEventListener("load", hideLoading);
+    browserFrame.addEventListener("load", hideLoading);
 
     frame.go(destination.href);
   }

@@ -2,7 +2,7 @@ let controller = null;
 let frame = null;
 
 const addressBar = document.getElementById("addressBar");
-const proxyFrame = document.getElementById("proxyFrame");
+const browserFrame = document.getElementById("browserFrame");
 
 const loading = document.getElementById("loading");
 const loadingText = document.getElementById("loadingText");
@@ -121,12 +121,12 @@ function watchFrameUrl() {
   let lastUrl = "";
 
   const update = () => {
-    if (!frame || !proxyFrame.contentWindow) {
+    if (!frame || !browserFrame.contentWindow) {
       return;
     }
 
     try {
-      const current = proxyFrame.contentWindow.location.href;
+      const current = browserFrame.contentWindow.location.href;
 
       if (!current || current === lastUrl) {
         return;
@@ -174,11 +174,11 @@ async function start(url) {
   try {
     const api = await initializeController();
 
-    frame = api.createFrame(proxyFrame);
+    frame = api.createFrame(browserFrame);
 
     watchFrameUrl();
 
-    proxyFrame.addEventListener("load", () => {
+    browserFrame.addEventListener("load", () => {
       hideLoading();
     });
 
