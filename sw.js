@@ -1,4 +1,4 @@
-importScripts("/controller/controller.sw.js");
+importScripts("./classroom/class.sw.js");
 
 self.addEventListener("fetch", (event) => {
   if ($scramjetController.shouldRoute(event)) {

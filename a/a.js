@@ -21,7 +21,7 @@ function renderApps(data) {
   for (const app of apps) {
     const link = document.createElement("a");
     link.className = "app";
-    link.href = "/l/?s=" + app.url;
+    link.href = "../l/?s=" + app.url;
     link.target = "_blank";
     link.rel = "noopener";
     link.title = app.name;

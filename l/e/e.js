@@ -69,8 +69,8 @@
 
   async function waitForServiceWorker() {
     const registration =
-      await navigator.serviceWorker.register("/sw.js", {
-        scope: "/",
+      await navigator.serviceWorker.register("../sw.js", {
+        scope: "../../",
         updateViaCache: "none"
       });
 
@@ -128,7 +128,8 @@
     const controller =
       new $scramjetController.Controller({
         serviceworker,
-        transport
+        transport,
+        config: { prefix: new URL("../../edu/", location.href).pathname }
       });
 
     await controller.wait();

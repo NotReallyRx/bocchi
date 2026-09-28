@@ -22,7 +22,7 @@ function renderActivities(zones) {
   for (const activity of activities) {
     const link = document.createElement("a");
     link.className = "activity";
-    link.href = `/l/?g=${activity.id}`;
+    link.href = `../l/?g=${activity.id}`;
     link.title = activity.name;
 
     const cover = document.createElement("div");

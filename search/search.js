@@ -48,8 +48,8 @@ function normalizeInput(value) {
 }
 
 async function waitForServiceWorker() {
-  const registration = await navigator.serviceWorker.register("/sw.js", {
-    scope: "/",
+  const registration = await navigator.serviceWorker.register("../sw.js", {
+    scope: "../",
     updateViaCache: "none",
   });
 
@@ -97,6 +97,7 @@ async function initializeController() {
   controller = new $scramjetController.Controller({
     serviceworker,
     transport,
+    config: { prefix: new URL("../edu/", location.href).pathname },
   });
 
   await controller.wait();
@@ -144,6 +145,12 @@ function watchFrameUrl() {
       const encoded = rewritten.href.slice(prefix.length);
 
       let destination = context.interface.codecDecode(encoded);
+
+      try {
+        const cleanUrl = new URL(destination);
+        cleanUrl.searchParams.delete("$io");
+        destination = cleanUrl.href;
+      } catch {}
 
       if (rewritten.hash) {
         destination += context.interface.codecDecode(
@@ -202,7 +209,7 @@ addressBar.addEventListener("keydown", (event) => {
 });
 
 homeButton.addEventListener("click", () => {
-  location.href = "/index/";
+  location.href = "../index/";
 });
 
 backButton.addEventListener("click", () => {
@@ -261,6 +268,6 @@ if (initialUrl) {
   if (lastVisited) {
     start(lastVisited);
   } else {
-    location.href = "/index/";
+    location.href = "../index/";
   }
 }

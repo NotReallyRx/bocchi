@@ -101,8 +101,8 @@
 
     const embedUrl =
       new URL(
-        "/l/e/",
-        window.location.origin
+        "e/",
+        window.location.href
       );
 
 
@@ -207,7 +207,7 @@
     "click",
     () => {
 
-      window.location.href = "/g/";
+      window.location.href = "../g/";
 
     }
   );

@@ -29,5 +29,5 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  location.href = `/search/?url=${encodeURIComponent(url)}`;
+  location.href = `../search/?url=${encodeURIComponent(url)}`;
 });

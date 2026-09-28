@@ -384,10 +384,10 @@ var $scramjetController;
       n = r(286),
       a = r(355);
     let c = {
-        prefix: "/~/sj/",
-        scramjetPath: "/scramjet/scramjet.js",
-        injectPath: "/controller/controller.inject.js",
-        wasmPath: "/scramjet/scramjet.wasm",
+        prefix: new URL("edu/", new URL("../../", location.href)).pathname,
+        scramjetPath: "../study/studying.js",
+        injectPath: "../classroom/class.inject.js",
+        wasmPath: "../study/studying.wasm",
         virtualWasmPath: "scramjet.wasm.js",
         codec: {
           encode: (e) => (e ? encodeURIComponent(e) : e),
