@@ -1,7 +1,7 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
 
-  const gameId = params.get("g");
+  const activityId = params.get("g");
   const siteUrl = params.get("s");
 
   const proxyFrame = document.getElementById("proxyFrame");
@@ -26,7 +26,7 @@
     loading.style.display = "none";
   }
 
-  async function loadGame() {
+  async function loadActivity() {
     setLoading("Loading activity...");
 
     const response = await fetch(ZONES_URL);
@@ -38,7 +38,7 @@
     const zones = await response.json();
 
     const activity = zones.find(
-      item => String(item.id) === String(gameId)
+      item => String(item.id) === String(activityId)
     );
 
     if (!activity) {
@@ -49,18 +49,18 @@
       throw new Error("Activity URL is missing.");
     }
 
-    const gameUrl = activity.url
+    const activityUrl = activity.url
       .replace("{HTML_URL}", HTML_URL);
 
-    const gameResponse = await fetch(gameUrl);
+    const activityResponse = await fetch(activityUrl);
 
-    if (!gameResponse.ok) {
+    if (!activityResponse.ok) {
       throw new Error(
-        `Couldn't load activity (${gameResponse.status}).`
+        `Couldn't load activity (${activityResponse.status}).`
       );
     }
 
-    const html = await gameResponse.text();
+    const html = await activityResponse.text();
 
     document.open();
     document.write(html);
@@ -144,8 +144,8 @@
 
   async function start() {
     try {
-      if (gameId !== null) {
-        await loadGame();
+      if (activityId !== null) {
+        await loadActivity();
         return;
       }
 

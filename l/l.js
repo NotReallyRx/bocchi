@@ -1,7 +1,7 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
 
-  const gameId = params.get("g");
+  const activityId = params.get("g");
   const siteUrl = params.get("s");
 
 
@@ -9,8 +9,8 @@
      DOM
      ========================================================= */
 
-  const gameFrame =
-    document.getElementById("gameFrame");
+  const activityFrame =
+    document.getElementById("activityFrame");
 
   const loading =
     document.getElementById("loading");
@@ -106,11 +106,11 @@
       );
 
 
-    if (gameId) {
+    if (activityId) {
 
       embedUrl.searchParams.set(
         "g",
-        gameId
+        activityId
       );
 
       return embedUrl.href;
@@ -152,7 +152,7 @@
      * Show the correct loading message.
      */
 
-    if (gameId) {
+    if (activityId) {
       showLoading("Loading activity...");
     } else {
       showLoading("Loading site...");
@@ -171,7 +171,7 @@
      * All of that is handled by e.js.
      */
 
-    gameFrame.addEventListener(
+    activityFrame.addEventListener(
       "load",
       hideLoading,
       {
@@ -180,11 +180,11 @@
     );
 
 
-    gameFrame.addEventListener(
+    activityFrame.addEventListener(
       "error",
       () => {
 
-        if (gameId) {
+        if (activityId) {
           showError("Couldn't load that activity.");
         } else {
           showError("Couldn't load that site.");
@@ -194,7 +194,7 @@
     );
 
 
-    gameFrame.src = embedUrl;
+    activityFrame.src = embedUrl;
 
   }
 
@@ -249,7 +249,7 @@
       }
 
 
-      if (gameId) {
+      if (activityId) {
         showLoading("Loading activity...");
       } else {
         showLoading("Loading site...");
@@ -279,7 +279,7 @@
        * gets stuck forever.
        */
 
-      gameFrame.addEventListener(
+      activityFrame.addEventListener(
         "load",
         hideLoading,
         {
@@ -288,7 +288,7 @@
       );
 
 
-      gameFrame.src = reloadUrl.href;
+      activityFrame.src = reloadUrl.href;
 
     }
   );
