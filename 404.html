@@ -208,7 +208,7 @@
       </p>
 
       <div class="actions">
-        <a class="primary" href="../">Back to homepage</a>
+        <a class="primary" id="homeLink" href="/">Back to homepage</a>
         <button class="secondary" type="button" id="backButton">Go back</button>
       </div>
 
@@ -218,13 +218,52 @@
   <script>
     setTimeout(function () {
       document.getElementById("mark").classList.add("failed");
-    }, 1250);
+    }, 2000);
+
+    /*
+     * "index", "g", "s", "l" and "a" are the site's own top-level
+     * route folders. Whichever of those shows up first in the
+     * current path marks where the site root is, e.g.
+     *   /websitefolder/g/game123/           -> root "/websitefolder/"
+     *   /websitefolder/index/dewew/ewewew/  -> root "/websitefolder/"
+     *
+     * Home always lives at root + "index/". If none of those
+     * folders appear in the path, fall back to "/index/".
+     */
+    function findHomeUrl() {
+
+      const routeFolders = ["index", "g", "s", "l", "a"];
+
+      const segments = location.pathname
+        .split("/")
+        .filter(Boolean);
+
+      const routePos = segments.findIndex(
+        segment => routeFolders.includes(segment.toLowerCase())
+      );
+
+      const rootSegments =
+        routePos === -1
+          ? []
+          : segments.slice(0, routePos);
+
+      const rootPath = rootSegments.length
+        ? "/" + rootSegments.join("/") + "/"
+        : "/";
+
+      return rootPath + "index/";
+
+    }
+
+    const homeUrl = findHomeUrl();
+
+    document.getElementById("homeLink").href = homeUrl;
 
     document.getElementById("backButton").addEventListener("click", function () {
       if (history.length > 1) {
         history.back();
       } else {
-        location.href = "../";
+        location.href = homeUrl;
       }
     });
   </script>
