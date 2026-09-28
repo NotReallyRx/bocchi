@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found | Bocchi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Figtree:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #201915;
+      --surface: #2a2019;
+      --surface-2: #33261c;
+      --cream: #f2e6d6;
+      --muted: #b4a08b;
+      --amber: #e0a45f;
+      --line: #3d3026;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: "Figtree", Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #frame {
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+      padding-top: calc(16px + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    }
+
+    #card {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 24px;
+      overflow: auto;
+
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    /* The "0" is the site's loading ring, stopped mid-spin. */
+    .code {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.04em;
+
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(96px, 26vw, 176px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      margin: 0 0 24px;
+    }
+
+    .ring {
+      width: 0.66em;
+      height: 0.66em;
+      border-radius: 50%;
+      border: 0.09em solid var(--line);
+      border-top-color: var(--amber);
+      transform: rotate(-35deg);
+      margin: 0 0.02em;
+    }
+
+    h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 24px;
+      max-width: 360px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .actions a,
+    .actions button {
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .primary {
+      background: var(--amber);
+      color: var(--bg);
+      border: 1px solid var(--amber);
+    }
+
+    .primary:hover { background: var(--cream); border-color: var(--cream); }
+
+    .secondary {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    .secondary:hover { background: var(--surface-2); color: var(--cream); }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    /* One motion: the ring settles into place on load. */
+    @media (prefers-reduced-motion: no-preference) {
+      .ring { animation: settle 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+      @keyframes settle {
+        from { transform: rotate(-395deg); }
+        to   { transform: rotate(-35deg); }
+      }
+    }
+
+    @media (max-width: 560px) {
+      #frame { padding: 8px; }
+      #card { border-radius: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="frame">
+    <main id="card">
+
+      <div class="code" role="img" aria-label="404">
+        <span aria-hidden="true">4</span>
+        <span class="ring" aria-hidden="true"></span>
+        <span aria-hidden="true">4</span>
+      </div>
+
+      <h1>Page not found</h1>
+
+      <p>
+        The address may be mistyped, or the page has moved.
+        Head back to the activities to keep browsing.
+      </p>
+
+      <div class="actions">
+        <a class="primary" href="/g/">Back to activities</a>
+        <button class="secondary" type="button" id="backButton">Go back</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("backButton").addEventListener("click", function () {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        location.href = "/g/";
+      }
+    });
+  </script>
+</body>
+
+</html>
